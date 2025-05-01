@@ -8,7 +8,7 @@ const ProductAll = () => {
 
   const getProduct = async () => {
     let keyword = query.get('q') || '';
-    const url = `http://localhost:5001/products?q=${keyword}`;
+    const url = `https://my-json-server.typicode.com/parkdayeong/shoppingmall-test/products?q=${keyword}`;
     console.log(url);
     const response = await fetch(url);
     const data = await response.json();
