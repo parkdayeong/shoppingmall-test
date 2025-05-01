@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import ProductAll from './page/ProductAll';
-import ProductDetail from './page/ProductDetail';
 import Login from './page/Login';
 import Header from './component/Header';
 import Visual from './component/Visual';

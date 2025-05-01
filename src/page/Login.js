@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import loginImg from '../images/login.png';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authenticateAction } from '../redux/action/authenticateAction';
 
 const Login = ({ setAuthenticate }) => {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userLogin = (e) => {
     e.preventDefault();
     console.log('login function');
-    setAuthenticate(true);
+    dispatch(authenticateAction.login(id, password));
     navigate('/');
   };
   return (
@@ -18,11 +23,21 @@ const Login = ({ setAuthenticate }) => {
           <form onSubmit={userLogin}>
             <div class='form-group'>
               <label for='email'>Email</label>
-              <input type='email' id='email' placeholder='이메일 주소를 입력해주세요' />
+              <input
+                type='email'
+                id='email'
+                placeholder='이메일 주소를 입력해주세요'
+                onChange={(e) => setId(e.target.value)}
+              />
             </div>
             <div class='form-group'>
               <label for='password'>Password</label>
-              <input type='password' id='password' placeholder='비밀번호를 입력해주세요' />
+              <input
+                type='password'
+                id='password'
+                placeholder='비밀번호를 입력해주세요'
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <button type='submit' class='signin-button'>
               Sign In

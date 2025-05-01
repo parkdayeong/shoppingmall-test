@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../component/ProductCard';
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { productAction } from '../redux/action/productAction';
 
 const ProductAll = () => {
-  const [productList, setProductList] = useState([]);
   const [query, SetQuery] = useSearchParams();
+
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.products.productList);
 
   const getProduct = async () => {
     let keyword = query.get('q') || '';
-    const url = `https://my-json-server.typicode.com/parkdayeong/shoppingmall-test/products?q=${keyword}`;
-    console.log(url);
-    const response = await fetch(url);
-    const data = await response.json();
-    setProductList(data);
+    dispatch(productAction.getProduct(keyword));
   };
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ProductAll = () => {
 
   return (
     <div className='promotion-grid'>
-      {productList.map((menu) => (
+      {productList?.map((menu) => (
         <ProductCard item={menu} />
       ))}
     </div>
